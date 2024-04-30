@@ -19,3 +19,17 @@ Apache Kafka
 | Offset           | A certain point in the partition log. When a consumer has consumed a message, it "commits" that offset, meaning that it tells the broker that the consumer group has consumed that message. If the consumer group is restarted, it will restart from the highest committed offset.  |
 | Rebalance        | When a consumer has joined or left a consumer group (such as during booting or shutdown), the group has to "rebalance", meaning that a group coordinator has to be chosen and partitions need to be assigned to the members of the consumer group.                                                                                                                    |
 | Heartbeat        | The mechanism by which the cluster knows which consumers are alive. Every now and then (heartbeatInterval), each consumer has to send a heartbeat request to the cluster leader. If one fails to do so for a certain period (sessionTimeout), it is considered dead and will be removed from the consumer group, triggering a rebalance. |
+
+<h3>Starting Zookeeper and Kafka from docker in Terminal</h3>
+
+```
+docker run -p 2181:2181 zookeeper
+```
+
+```
+docker run -p 9092:9092 \
+-e KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:2181 \
+-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092 \
+-e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 \
+confluentinc/cp-kafka
+```
