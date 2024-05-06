@@ -33,3 +33,10 @@ docker run -p 9092:9092 \
 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 \
 confluentinc/cp-kafka
 ```
+
+<h3>Starting kRaft version of kafka(zookeeper free)</h3>
+
+```
+docker run -p 9092:9092 apache/kafka:3.7.0
+```
+
